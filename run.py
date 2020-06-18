@@ -56,7 +56,11 @@ def get_protection(access_token, branch_name, owner, repo_name):
         print(f"Could not find repo https://github.com/{owner}/{repo_name}")
         raise
     branch = repo.branch(branch_name)
-    protection = branch.protection()
+    try:
+        protection = branch.protection()
+    except NotFoundError:
+        print(f"{branch_name} is not protected so there is nothing to do, exiting.")
+        exit(0)
     return protection
 
 
