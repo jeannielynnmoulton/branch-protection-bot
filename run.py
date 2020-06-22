@@ -3,6 +3,7 @@ from distutils.util import strtobool
 from time import sleep
 
 import configargparse
+import traceback
 from github3 import login
 from github3.exceptions import NotFoundError, GitHubException
 
@@ -59,6 +60,7 @@ def get_protection(access_token, branch_name, owner, repo_name):
     try:
         protection = branch.protection()
     except NotFoundError:
+        traceback.print_exc()
         print(f"{branch_name} is not protected so there is nothing to do, exiting.")
         exit(0)
     return protection
