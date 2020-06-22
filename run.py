@@ -61,7 +61,7 @@ def get_protection(access_token, branch_name, owner, repo_name):
         protection = branch.protection()
     except NotFoundError:
         traceback.print_exc()
-        print(f"{branch_name} is not protected so there is nothing to do, exiting.")
+        print(f"Error when calling branch.protection(). Either {branch_name} is not protected so there is nothing to do, or the bot does not have sufficient permission, exiting without error.")
         exit(0)
     return protection
 
